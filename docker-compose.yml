@@ -1,0 +1,19 @@
+version: '3.8'
+services:
+  postgresql:
+    image: library/postgres:12.8-alpine
+    restart: always
+    hostname: postgres
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: databook
+    volumes:
+      - ./sql_partition:/docker-entrypoint-initdb.d/
+    ports:
+      - '5432:5432'
+    networks:
+      - overlay
+
+networks:
+  overlay:
